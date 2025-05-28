@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # Actualiza el string de conexión con las credenciales reales (usuario, contraseña, host y base de datos)
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:root@localhost:3306/agendamiento_citas"
+SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:password@localhost:3306/agendamiento_citas"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,

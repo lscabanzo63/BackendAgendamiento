@@ -6,6 +6,7 @@ from datetime import timedelta
 from auth import (verify_password, get_password_hash, create_access_token,  decode_access_token, ACCESS_TOKEN_EXPIRE_MINUTES)
 import models, schemas
 from database import SessionLocal, engine
+from fastapi.middleware.cors import CORSMiddleware    
 
 # Crear todas las tablas (en desarrollo)
 models.Base.metadata.create_all(bind=engine)
@@ -14,6 +15,15 @@ app = FastAPI()
 
 # Configuración de OAuth2: se utilizará el endpoint /login
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+# === Add this block ===
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # your React dev origin
+    allow_credentials=True,
+    allow_methods=["*"],      # GET, POST, PUT, DELETE, OPTIONS…
+    allow_headers=["*"],      # Content-Type, Authorization, …
+)
 
 # Dependencia para obtener la sesión de la BD
 def get_db():
